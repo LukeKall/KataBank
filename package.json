@@ -1,0 +1,25 @@
+{
+  "name": "katabank",
+  "version": "1.0.0",
+  "description": "KataBank Project",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run dev",
+    "dev": "webpack-dev-server --config webwork/webpack.config.js --profile --progress --hot"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LukeKall/KataBank.git"
+  },
+  "author": "Kevin Archet",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LukeKall/KataBank/issues"
+  },
+  "homepage": "https://github.com/LukeKall/KataBank#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.9.7"
+  }
+}
