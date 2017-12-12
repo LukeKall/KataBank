@@ -19,6 +19,14 @@ public class Currency {
         return code;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getSymbol() {
+        return symbol;
+    }
+
     /**
      * Convertit une valeur en une autre devise
      * @param amount
@@ -27,5 +35,20 @@ public class Currency {
      */
     public long convertAmountValueInAnotherCurrency(long amount, Currency currency) {
         return amount;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Currency currency = (Currency) o;
+
+        return code.equals(currency.code);
+    }
+
+    @Override
+    public int hashCode() {
+        return code.hashCode();
     }
 }

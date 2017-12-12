@@ -49,4 +49,22 @@ public class Amount {
         this.currency = currency;
         return this;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Amount amount = (Amount) o;
+
+        if (value != amount.value) return false;
+        return currency != null ? currency.equals(amount.currency) : amount.currency == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = currency != null ? currency.hashCode() : 0;
+        result = 31 * result + (int) (value ^ (value >>> 32));
+        return result;
+    }
 }

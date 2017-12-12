@@ -23,21 +23,9 @@ public class AccountRepository implements IAccountRepository {
 
     Map<String, Account> allAcounts = new HashMap<>();
 
-    @Inject
-    IClientPortfolio clientPortfolio;
-
-    @Inject
-    ICurrencyRepository currencyRepository;
-
-    public AccountRepository() {
-    }
-
-    @PostConstruct
-    public void init(){
-        Client client = clientPortfolio.getClientByLogin("pierre-jean");
-        Currency currency = currencyRepository.getCurrency("eur");
-        Balance balance = new Balance(new Amount(currency, 100), new Date());
-        Account account = new Account(client.getId(), "mainAccount", "0112154", balance);
+    public AccountRepository(){
+        Balance balance = new Balance(new Amount(new Currency("eur", "euro", "€"), 100), new Date());
+        Account account = new Account("3a8423bc-df4d-11e7-80c1-9a214cf093ae", UUID.fromString("3a841dea-df4d-11e7-80c1-9a214cf093ae"), "mainAccount", "0112154", balance);
         allAcounts.put(account.getId().toString(), account);
     }
 

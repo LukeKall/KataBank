@@ -18,6 +18,14 @@ public class Balance {
         this.lastUpdate = lastUpdate;
     }
 
+    public Amount getAmount() {
+        return amount;
+    }
+
+    public Date getLastUpdate() {
+        return lastUpdate;
+    }
+
     /**
      * Vérifie si la balance est suffisante pour faire un débit
      * @param amount

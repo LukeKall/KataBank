@@ -13,6 +13,6 @@ public interface IClientPortfolio {
     void addClient(Client client);
     void removeClient(Client client);
     void updateClient(Client client);
-    List<Client> GetAllClients();
+    List<Client> getAllClients();
     Client getClientByLogin(String login);
 }

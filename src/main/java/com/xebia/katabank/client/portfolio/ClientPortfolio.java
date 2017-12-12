@@ -19,7 +19,7 @@ public class ClientPortfolio implements IClientPortfolio {
     Map<String, Client> allClients = new HashMap<>();
 
     public ClientPortfolio() {
-        Client client = new Client("pierre-jean", "unknown", "pierre-jean");
+        Client client = new Client("3a841dea-df4d-11e7-80c1-9a214cf093ae","pierre-jean", "unknown", "pierre-jean");
         allClients.put(client.getId().toString(), client);
     }
 
@@ -44,7 +44,7 @@ public class ClientPortfolio implements IClientPortfolio {
     }
 
     @Override
-    public List<Client> GetAllClients() {
+    public List<Client> getAllClients() {
         return new ArrayList<>(allClients.values());
     }
 

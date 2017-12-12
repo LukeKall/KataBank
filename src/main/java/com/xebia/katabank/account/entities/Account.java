@@ -40,6 +40,18 @@ public class Account {
         return id;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public Balance getBalance() {
+        return balance;
+    }
+
     /**
      * Permet de réaliser un retrait bancaire
      * @param amountValue
@@ -75,4 +87,18 @@ public class Account {
         return this.clientId == clientId;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Account account = (Account) o;
+
+        return id.equals(account.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
 }
