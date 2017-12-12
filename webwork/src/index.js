@@ -1,1 +1,3 @@
-document.write("hello, webpack!");
+import foo from './foo';
+
+foo();
