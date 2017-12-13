@@ -10,7 +10,7 @@ import javax.inject.Named;
 import java.util.List;
 
 @Named
-public class ClientService implements  IClientService {
+public class GetClientInformationService implements IGetClientInformationService {
 
     @Inject
     IClientPortfolio clientPortfolio;

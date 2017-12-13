@@ -3,7 +3,7 @@ package com.xebia.katabank.account.api;
 import com.xebia.katabank.MainLauncher;
 import com.xebia.katabank.account.entities.Account;
 import com.xebia.katabank.account.entities.Balance;
-import com.xebia.katabank.account.services.AccountService;
+import com.xebia.katabank.account.services.GetAccountInformationService;
 import com.xebia.katabank.money.entities.Amount;
 import com.xebia.katabank.money.entities.Currency;
 import org.junit.jupiter.api.Test;
@@ -28,7 +28,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class AccountRestControllerTest {
 
     @MockBean
-    AccountService accountService;
+    GetAccountInformationService getAccountInformationService;
 
     @Autowired
     private TestRestTemplate restTemplate;
@@ -41,10 +41,10 @@ public class AccountRestControllerTest {
 
         Currency currency = new Currency("eur", "euro", "€");
         Account account = new Account(UUID.fromString("ac3828b4-dfed-11e7-80c1-9a214cf093ae"), "name", "number", new Balance(new Amount(currency, 100), date));
-        Mockito.when(accountService.getAccountInformation(account.getId().toString())).thenReturn(account);
+        Mockito.when(getAccountInformationService.getAccountInformation(account.getId().toString())).thenReturn(account);
 
         String jsonAccount = "{\"id\":\""+account.getId().toString()+"\",\"name\":\"name\",\"number\":\"number\",\"balance\":{\"amount\":{\"currency\":{\"code\":\"eur\",\"name\":\"euro\",\"symbol\":\"€\"},\"value\":100},\"lastUpdate\":\""+df.format(date)+"\"}}";
-        String message = this.restTemplate.getForObject("/account/"+account.getId().toString(), String.class);
+        String message = this.restTemplate.getForObject("/accounts/"+account.getId().toString(), String.class);
         assertEquals(jsonAccount, message);
     }
 

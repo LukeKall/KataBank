@@ -1,9 +1,9 @@
-package com.xebia.katabank.transaction.services;
+package com.xebia.katabank.account.services;
 
-import com.xebia.katabank.extension.MockitoExtension;
 import com.xebia.katabank.account.entities.Account;
 import com.xebia.katabank.account.error.BalanceUnsuffisantException;
 import com.xebia.katabank.account.repository.IAccountRepository;
+import com.xebia.katabank.extension.MockitoExtension;
 import com.xebia.katabank.money.entities.Amount;
 import com.xebia.katabank.money.entities.Currency;
 import com.xebia.katabank.money.repository.ICurrencyRepository;
@@ -25,14 +25,15 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * Tests de la classe TransactionService
+ * Tests de la classe MakeWithdrawalService
  */
 @ExtendWith(MockitoExtension.class)
 @RunWith(JUnitPlatform.class)
-public class TransactionServiceTest {
+public class MakeWithdrawalServiceTest {
 
     @Mock
     IAccountRepository accountRepository;
@@ -44,7 +45,7 @@ public class TransactionServiceTest {
     ITransactionHistorical transactionHistorical;
 
     @InjectMocks
-    TransactionService transactionService;
+    MakeWithdrawalService makeWithdrawalService;
 
     @Test
     public void testMakeAAccountWithdrawal() throws BalanceUnsuffisantException {
@@ -77,10 +78,11 @@ public class TransactionServiceTest {
         Mockito.doAnswer(answerTransaction).when(transactionHistorical).addTransaction(transaction);
         Mockito.doAnswer(answerAccount).when(accountRepository).updateAccount(account);
 
-        transactionService.makeAAccountWithdrawal("id", 10, "eur");
+        Transaction transactionResult = makeWithdrawalService.makeAAccountWithdrawal("id", 10, "eur");
 
         assertTrue(transactionList.contains(transaction));
         assertTrue(accountList.contains(account));
+        assertEquals(transaction, transactionResult);
 
     }
 }

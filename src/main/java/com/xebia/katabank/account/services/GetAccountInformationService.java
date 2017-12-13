@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 @Named
-public class AccountService implements IAccountService{
+public class GetAccountInformationService implements IGetAccountInformationService {
 
     @Inject
     IAccountRepository accountRepository;

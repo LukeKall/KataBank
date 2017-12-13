@@ -6,7 +6,6 @@ import com.xebia.katabank.transaction.entities.Transaction;
 import com.xebia.katabank.transaction.entities.Withdrawal;
 import org.junit.jupiter.api.Test;
 
-import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

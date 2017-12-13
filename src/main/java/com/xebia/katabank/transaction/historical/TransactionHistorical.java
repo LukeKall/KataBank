@@ -4,7 +4,6 @@ import com.xebia.katabank.money.entities.Amount;
 import com.xebia.katabank.money.entities.Currency;
 import com.xebia.katabank.transaction.entities.Transaction;
 import com.xebia.katabank.transaction.entities.Withdrawal;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.inject.Named;
 import java.util.*;

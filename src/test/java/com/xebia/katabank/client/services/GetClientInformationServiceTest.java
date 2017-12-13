@@ -22,11 +22,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * Tests de la classe ClientService
+ * Tests de la classe GetClientInformationService
  */
 @ExtendWith(MockitoExtension.class)
 @RunWith(JUnitPlatform.class)
-public class ClientServiceTest {
+public class GetClientInformationServiceTest {
 
     @Mock
     ClientPortfolio clientPortfolio;
@@ -35,20 +35,20 @@ public class ClientServiceTest {
     AccountRepository accountRepository;
 
     @InjectMocks
-    ClientService clientService;
+    GetClientInformationService getClientInformationService;
 
     @Test
     public void testGetClientInformation(){
         Client client = new Client("login", "lastName", "firstName");
         Mockito.when(clientPortfolio.getClient(client.getId().toString())).thenReturn(client);
-        assertEquals(client, clientService.getClientInformation(client.getId().toString()));
+        assertEquals(client, getClientInformationService.getClientInformation(client.getId().toString()));
     }
 
     @Test
     public void testGetClientInformationByLogin(){
         Client client = new Client("login", "lastName", "firstName");
         Mockito.when(clientPortfolio.getClientByLogin("login")).thenReturn(client);
-        assertEquals(client, clientService.getClientInformationByLogin("login"));
+        assertEquals(client, getClientInformationService.getClientInformationByLogin("login"));
     }
 
     @Test
@@ -58,6 +58,6 @@ public class ClientServiceTest {
         accountList.add(new Account(id, "name", "number", Mockito.mock(Balance.class)));
         accountList.add(new Account(id, "name2", "number2", Mockito.mock(Balance.class)));
         Mockito.when(accountRepository.getAccountsByClient(id.toString())).thenReturn(accountList);
-        assertTrue(accountList.containsAll(clientService.getAllClientAccounts(id.toString())));
+        assertTrue(accountList.containsAll(getClientInformationService.getAllClientAccounts(id.toString())));
     }
 }

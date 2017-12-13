@@ -4,7 +4,7 @@ import com.xebia.katabank.MainLauncher;
 import com.xebia.katabank.account.entities.Account;
 import com.xebia.katabank.account.entities.Balance;
 import com.xebia.katabank.client.entities.Client;
-import com.xebia.katabank.client.services.ClientService;
+import com.xebia.katabank.client.services.GetClientInformationService;
 import com.xebia.katabank.money.entities.Amount;
 import com.xebia.katabank.money.entities.Currency;
 import org.junit.jupiter.api.Test;
@@ -30,7 +30,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ClientRestControllerTest {
 
     @MockBean
-    ClientService clientService;
+    GetClientInformationService getClientInformationService;
 
     @Autowired
     private TestRestTemplate restTemplate;
@@ -38,8 +38,8 @@ public class ClientRestControllerTest {
     @Test
     public void testGetClientByLogin(){
         Client client = new Client("login", "lastname", "firstname");
-        Mockito.when(clientService.getClientInformationByLogin("login")).thenReturn(client);
-        String message = this.restTemplate.getForObject("/client/login", String.class);
+        Mockito.when(getClientInformationService.getClientInformationByLogin("login")).thenReturn(client);
+        String message = this.restTemplate.getForObject("/clients/login", String.class);
         String jsonClient = "{\"id\":\""+client.getId().toString()+"\",\"login\":\"login\",\"lastName\":\"lastname\",\"firstName\":\"firstname\"}";
         assertEquals(jsonClient, message);
     }
@@ -56,8 +56,8 @@ public class ClientRestControllerTest {
         Account account = new Account(client.getId(), "name", "number", new Balance(new Amount(currency, 100), date));
         accountList.add(account);
 
-        Mockito.when(clientService.getAllClientAccounts(client.getId().toString())).thenReturn(accountList);
-        String message = this.restTemplate.getForObject("/client/accounts/" + client.getId().toString(), String.class);
+        Mockito.when(getClientInformationService.getAllClientAccounts(client.getId().toString())).thenReturn(accountList);
+        String message = this.restTemplate.getForObject("/clients/accounts/" + client.getId().toString(), String.class);
         String jsonClient = "[{\"id\":\""+account.getId().toString()+"\",\"name\":\"name\",\"number\":\"number\",\"balance\":{\"amount\":{\"currency\":{\"code\":\"eur\",\"name\":\"euro\",\"symbol\":\"€\"},\"value\":100},\"lastUpdate\":\""+df.format(date)+"\"}}]";
         assertEquals(jsonClient, message);
     }

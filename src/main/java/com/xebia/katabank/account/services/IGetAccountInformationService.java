@@ -5,7 +5,7 @@ import com.xebia.katabank.account.entities.Account;
 /**
  * Services offerts par un compte bancaire
  */
-public interface IAccountService {
+public interface IGetAccountInformationService {
 
     Account getAccountInformation(String accountId);
 }

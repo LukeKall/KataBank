@@ -1,16 +1,10 @@
 package com.xebia.katabank.account.repository;
 
 import com.xebia.katabank.account.entities.Account;
-import com.xebia.katabank.client.entities.Client;
-import com.xebia.katabank.client.portfolio.IClientPortfolio;
-import com.xebia.katabank.money.entities.Amount;
 import com.xebia.katabank.account.entities.Balance;
+import com.xebia.katabank.money.entities.Amount;
 import com.xebia.katabank.money.entities.Currency;
-import com.xebia.katabank.money.repository.ICurrencyRepository;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-import javax.annotation.PostConstruct;
-import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.*;
 import java.util.stream.Collectors;

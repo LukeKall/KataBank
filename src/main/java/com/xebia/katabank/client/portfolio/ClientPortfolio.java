@@ -1,14 +1,12 @@
 package com.xebia.katabank.client.portfolio;
 
 import com.xebia.katabank.client.entities.Client;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.inject.Named;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * Repository qui sotcke les clients en mémoire

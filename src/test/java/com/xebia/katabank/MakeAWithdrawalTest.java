@@ -3,16 +3,18 @@ package com.xebia.katabank;
 import com.xebia.katabank.account.entities.Account;
 import com.xebia.katabank.account.error.BalanceUnsuffisantException;
 import com.xebia.katabank.account.repository.AccountRepository;
-import com.xebia.katabank.account.services.AccountService;
-import com.xebia.katabank.account.services.IAccountService;
+import com.xebia.katabank.account.services.GetAccountInformationService;
+import com.xebia.katabank.account.services.IGetAccountInformationService;
 import com.xebia.katabank.client.entities.Client;
 import com.xebia.katabank.client.portfolio.ClientPortfolio;
-import com.xebia.katabank.client.services.ClientService;
-import com.xebia.katabank.client.services.IClientService;
+import com.xebia.katabank.client.services.GetClientInformationService;
+import com.xebia.katabank.client.services.IGetClientInformationService;
 import com.xebia.katabank.money.repository.CurrencyRepository;
+import com.xebia.katabank.transaction.entities.Transaction;
+import com.xebia.katabank.transaction.entities.Withdrawal;
 import com.xebia.katabank.transaction.historical.TransactionHistorical;
-import com.xebia.katabank.transaction.services.ITransactionService;
-import com.xebia.katabank.transaction.services.TransactionService;
+import com.xebia.katabank.account.services.IMakeWithdrawalService;
+import com.xebia.katabank.account.services.MakeWithdrawalService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,36 +25,43 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(classes = {ClientService.class, TransactionService.class, AccountService.class, ClientPortfolio.class, AccountRepository.class, CurrencyRepository.class, TransactionHistorical.class})
+@SpringBootTest(classes = {GetClientInformationService.class, MakeWithdrawalService.class, GetAccountInformationService.class, ClientPortfolio.class, AccountRepository.class, CurrencyRepository.class, TransactionHistorical.class})
 public class MakeAWithdrawalTest {
 
     @Inject
-    ITransactionService transactionService;
+    IMakeWithdrawalService makeWithdrawalService;
 
     @Inject
-    IAccountService accountService;
+    IGetAccountInformationService getAccountInformationService;
 
     @Inject
-    IClientService clientService;
+    IGetClientInformationService getClientInformationService;
 
     @Test
     public void testMakeAwithdrawal() throws BalanceUnsuffisantException {
 
         String login = "pierre-jean";
-        Client client = clientService.getClientInformationByLogin(login);
+        Client client = getClientInformationService.getClientInformationByLogin(login);
         assertNotNull(client);
 
-        List<Account> accountList = clientService.getAllClientAccounts(client.getId().toString());
+        List<Account> accountList = getClientInformationService.getAllClientAccounts(client.getId().toString());
         assertEquals(1, accountList.size());
 
         Account account = accountList.get(0);
         assertEquals(100, account.getBalance().getAmount().getValue());
 
-        transactionService.makeAAccountWithdrawal(account.getId().toString(), 10, "eur");
+        Transaction transaction = makeWithdrawalService.makeAAccountWithdrawal(account.getId().toString(), 10, "eur");
+        assertNotNull(transaction);
+        assertTrue(transaction instanceof Withdrawal);
+        assertEquals(10, transaction.getAmount().getValue());
 
-        account = accountService.getAccountInformation(account.getId().toString());
+        Withdrawal withdrawal = (Withdrawal) transaction;
+        assertEquals(account.getId(), withdrawal.getDebitAccountId());
+
+        account = getAccountInformationService.getAccountInformation(withdrawal.getDebitAccountId().toString());
         assertNotNull(account);
         assertEquals(90, account.getBalance().getAmount().getValue());
     }

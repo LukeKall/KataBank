@@ -1,10 +1,8 @@
 package com.xebia.katabank.client.portfolio;
 
 import com.xebia.katabank.client.entities.Client;
-import com.xebia.katabank.client.portfolio.ClientPortfolio;
 import org.junit.jupiter.api.Test;
 
-import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,8 +1,6 @@
 package com.xebia.katabank.money.repository;
 
 import com.xebia.katabank.money.entities.Currency;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 import javax.inject.Named;
 import java.util.ArrayList;
 import java.util.HashMap;

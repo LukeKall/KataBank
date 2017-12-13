@@ -19,22 +19,22 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- * Tests de la classe AccountService
+ * Tests de la classe GetAccountInformationService
  */
 @ExtendWith(MockitoExtension.class)
 @RunWith(JUnitPlatform.class)
-public class AccountServiceTest {
+public class GetAccountInformationServiceTest {
 
     @Mock
     IAccountRepository accountRepository;
 
     @InjectMocks
-    AccountService accountService;
+    GetAccountInformationService getAccountInformationService;
 
     @Test
     public void getAccountInformation(){
         Account account = new Account(UUID.randomUUID(), "account", "number", Mockito.mock(Balance.class));
         Mockito.when(accountRepository.getAccount(account.getId().toString())).thenReturn(account);
-        assertEquals(account, accountService.getAccountInformation(account.getId().toString()));
+        assertEquals(account, getAccountInformationService.getAccountInformation(account.getId().toString()));
     }
 }

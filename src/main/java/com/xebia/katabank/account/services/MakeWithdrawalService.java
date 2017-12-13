@@ -1,4 +1,4 @@
-package com.xebia.katabank.transaction.services;
+package com.xebia.katabank.account.services;
 
 import com.xebia.katabank.account.entities.Account;
 import com.xebia.katabank.account.error.BalanceUnsuffisantException;
@@ -12,7 +12,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 @Named
-public class TransactionService implements ITransactionService {
+public class MakeWithdrawalService implements IMakeWithdrawalService {
 
     @Inject
     IAccountRepository accountRepository;
@@ -31,11 +31,12 @@ public class TransactionService implements ITransactionService {
      * @throws BalanceUnsuffisantException
      */
     @Override
-    public void makeAAccountWithdrawal(String accountId, long amount, String codeCurrency) throws BalanceUnsuffisantException {
+    public Transaction makeAAccountWithdrawal(String accountId, long amount, String codeCurrency) throws BalanceUnsuffisantException {
         Account account = accountRepository.getAccount(accountId);
         Currency currency = currencyRepository.getCurrency(codeCurrency);
         Transaction transaction = account.makeAWithdrawal(amount, currency);
         transactionHistorical.addTransaction(transaction);
         accountRepository.updateAccount(account);
+        return transaction;
     }
 }
