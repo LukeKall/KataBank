@@ -2,7 +2,6 @@ package com.xebia.katabank.transaction.services;
 
 import com.xebia.katabank.MockitoExtension;
 import com.xebia.katabank.account.entities.Account;
-import com.xebia.katabank.account.entities.Balance;
 import com.xebia.katabank.account.error.BalanceUnsuffisantException;
 import com.xebia.katabank.account.repository.IAccountRepository;
 import com.xebia.katabank.money.entities.Amount;
@@ -11,7 +10,6 @@ import com.xebia.katabank.money.repository.ICurrencyRepository;
 import com.xebia.katabank.transaction.entities.Transaction;
 import com.xebia.katabank.transaction.entities.Withdrawal;
 import com.xebia.katabank.transaction.historical.ITransactionHistorical;
-import com.xebia.katabank.transaction.services.TransactionService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.platform.runner.JUnitPlatform;
@@ -19,11 +17,9 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.Spy;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
-import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -64,7 +60,7 @@ public class TransactionServiceTest {
 
         Answer<Void> answerTransaction = new Answer<Void>() {
             public Void answer(InvocationOnMock invocation) throws Throwable {
-                Transaction transaction = invocation.getArgumentAt(0, Transaction.class);
+                Transaction transaction = invocation.getArgument(0);
                 transactionList.add(transaction);
                 return null;
             }
@@ -72,7 +68,7 @@ public class TransactionServiceTest {
 
         Answer<Void> answerAccount = new Answer<Void>() {
             public Void answer(InvocationOnMock invocation) throws Throwable {
-                Account account = invocation.getArgumentAt(0, Account.class);
+                Account account = invocation.getArgument(0);
                 accountList.add(account);
                 return null;
             }

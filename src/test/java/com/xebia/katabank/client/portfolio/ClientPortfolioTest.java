@@ -63,5 +63,7 @@ public class ClientPortfolioTest {
         ClientPortfolio clientPortfolio = new ClientPortfolio();
         Client client = new Client("3a841dea-df4d-11e7-80c1-9a214cf093ae","pierre-jean", "unknown", "pierre-jean");
         assertEquals(client, clientPortfolio.getClientByLogin("pierre-jean"));
+
+        assertNull(clientPortfolio.getClientByLogin("autre"));
     }
 }

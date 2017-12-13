@@ -8,5 +8,5 @@ import java.util.List;
 public interface IClientRestApi {
 
     Client getClientByLogin(String login);
-    List<Account> getClientById(String idClient);
+    List<Account> getAllAccountsById(String idClient);
 }

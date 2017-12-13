@@ -53,6 +53,6 @@ public class ClientPortfolio implements IClientPortfolio {
        return this.allClients.values()
                .stream()
                .filter(client -> client.getLogin().equals(login))
-               .collect(Collectors.toList()).get(0);
+               .findFirst().orElse(null);
     }
 }

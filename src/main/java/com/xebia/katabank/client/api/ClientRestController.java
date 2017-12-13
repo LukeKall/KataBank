@@ -24,7 +24,7 @@ public class ClientRestController implements IClientRestApi{
     }
 
     @RequestMapping(value = "/accounts/{id}", method = RequestMethod.GET)
-    public List<Account> getClientById(@PathVariable(value = "id") String idClient){
+    public List<Account> getAllAccountsById(@PathVariable(value = "id") String idClient){
         return clientService.getAllClientAccounts(idClient);
     }
 
