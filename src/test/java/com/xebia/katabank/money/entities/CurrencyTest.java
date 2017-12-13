@@ -1,6 +1,8 @@
-package test.java.com.xebia.katabank.money.entities;
+package com.xebia.katabank.money.entities;
 
-import com.xebia.katabank.money.entities.Currency;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Test de la classe Currency
@@ -8,9 +10,9 @@ import com.xebia.katabank.money.entities.Currency;
 public class CurrencyTest {
 
     @Test
-    public testConvertAmountValueInAnotherCurrency(){
-        Currency currency = new Currency();
-        Currency newCurrency = new Currency();
+    public void testConvertAmountValueInAnotherCurrency(){
+        Currency currency = new Currency("eur", "eur", "€");
+        Currency newCurrency = new Currency("dol", "dol", "$");
         assertEquals(10, currency.convertAmountValueInAnotherCurrency(10, newCurrency));
     }
 }

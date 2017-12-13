@@ -11,7 +11,7 @@ public interface ICurrencyRepository {
 
     Currency getCurrency(String code);
     void addCurrency(Currency currency);
-    void removeCurrency(Currency currency);
+    void removeCurrency(String code);
     void updateCurrency(Currency currency);
     List<Currency> GetAllCurrencies();
 

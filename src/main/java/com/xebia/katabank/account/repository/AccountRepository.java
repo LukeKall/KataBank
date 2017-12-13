@@ -40,7 +40,7 @@ public class AccountRepository implements IAccountRepository {
     }
 
     @Override
-    public void removeAccount(Account account) {
+    public void removeAccount(String id) {
         throw new NotImplementedException();
     }
 
@@ -57,7 +57,7 @@ public class AccountRepository implements IAccountRepository {
     }
 
     @Override
-    public List<Account> getAcountsByClient(String clientId) {
+    public List<Account> getAccountsByClient(String clientId) {
         return allAcounts.values().stream().filter(account -> account.isClientPropriety(UUID.fromString(clientId))).collect(Collectors.toList());
     }
 }

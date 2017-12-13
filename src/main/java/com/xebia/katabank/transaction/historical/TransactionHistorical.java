@@ -1,12 +1,13 @@
 package com.xebia.katabank.transaction.historical;
 
+import com.xebia.katabank.money.entities.Amount;
+import com.xebia.katabank.money.entities.Currency;
 import com.xebia.katabank.transaction.entities.Transaction;
+import com.xebia.katabank.transaction.entities.Withdrawal;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.inject.Named;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Repository qui stock les transactions en mémoire
@@ -15,6 +16,11 @@ import java.util.Map;
 public class TransactionHistorical implements ITransactionHistorical {
 
     Map<String, Transaction> allTransactions = new HashMap<>();
+
+    public TransactionHistorical(){
+        Transaction transaction = new Withdrawal("100c2df0-dfde-11e7-80c1-9a214cf093ae", new Amount(new Currency("eur", "euro", "€"), 50), new Date(), UUID.fromString("3a8423bc-df4d-11e7-80c1-9a214cf093ae"));
+        allTransactions.put(transaction.getId().toString(), transaction);
+    }
 
     @Override
     public Transaction getTransaction(String id) {
@@ -27,7 +33,7 @@ public class TransactionHistorical implements ITransactionHistorical {
     }
 
     @Override
-    public void removeTransaction(Transaction transaction) {
+    public void removeTransaction(String id) {
         throw new NotImplementedException();
     }
 

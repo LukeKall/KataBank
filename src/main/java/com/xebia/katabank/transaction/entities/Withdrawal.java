@@ -16,4 +16,13 @@ public class Withdrawal extends Transaction {
         super(amount, date);
         this.debitAccountId = debitAccountId;
     }
+
+    public Withdrawal(String id, Amount amount, Date date, UUID debitAccountId) {
+        super(id, amount, date);
+        this.debitAccountId = debitAccountId;
+    }
+
+    public UUID getDebitAccountId() {
+        return debitAccountId;
+    }
 }

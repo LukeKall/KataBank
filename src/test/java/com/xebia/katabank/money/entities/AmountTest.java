@@ -1,7 +1,15 @@
-package test.java.com.xebia.katabank.money.entities;
+package com.xebia.katabank.money.entities;
 
+import com.xebia.katabank.account.error.BalanceUnsuffisantException;
 import com.xebia.katabank.money.entities.Amount;
 import com.xebia.katabank.money.entities.Currency;
+import org.junit.jupiter.api.Test;
+import org.mockito.Matchers;
+import org.mockito.Mockito;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.AdditionalAnswers.returnsFirstArg;
+import static org.mockito.Matchers.eq;
 
 /**
  * Test de la classe Amount
@@ -9,27 +17,37 @@ import com.xebia.katabank.money.entities.Currency;
 public class AmountTest {
 
     @Test
+    public void testConvertInAnotherCurrency(){
+        Currency currency = Mockito.mock(Currency.class);
+        Currency amountCurrency = Mockito.mock(Currency.class);
+        Mockito.when(amountCurrency.convertAmountValueInAnotherCurrency(Mockito.anyLong(), eq(currency))).then(i -> i.getArgumentAt(0, Long.class));
+        Amount amount = new Amount(amountCurrency, 100);
+        amount.convertInAnotherCurrency(currency);
+        assertEquals(100, amount.getValue());
+        assertEquals(currency, amount.getCurrency());
+    }
+
+    @Test
     public void testIsSuperiorThan(){
-        Amount amount = new Amount();
-        Amount amountSuperior = new Amount();
+        Currency currencySupperior = Mockito.mock(Currency.class);
+        Currency currency = Mockito.mock(Currency.class);
+        Mockito.when(currency.convertAmountValueInAnotherCurrency(Mockito.anyLong(), eq(currencySupperior))).then(i -> i.getArgumentAt(0, Long.class));
+        Mockito.when(currencySupperior.convertAmountValueInAnotherCurrency(Mockito.anyLong(), eq(currency))).then(i -> i.getArgumentAt(0, Long.class));
+        Amount amount = new Amount(currency, 100);
+        Amount amountSuperior = new Amount(currencySupperior, 150);
         assertFalse(amount.isSuperiorThan(amountSuperior));
         assertTrue(amountSuperior.isSuperiorThan(amount));
     }
 
     @Test
     public void testDebit(){
-        Amount amount = new Amount();
-        Amount amountToDebit = new Amount();
-        amount.debit(amountToDebit);
-        assertEquals(10, amount.getValue());
-    }
-
-    @Test
-    public void testConvertInAnotherCurrency(){
-        Amount amount = new Amount();
-        Currency newCurrency = new Currency();
-        amount.convertInAnotherCurrency(newCurrency);
-        assertEquals(10, amount.getValue());
-        assertEquals(newCurrency, amount.getCurrency());
+        Currency currencySup= Mockito.mock(Currency.class);
+        Currency currency = Mockito.mock(Currency.class);
+        Mockito.when(currency.convertAmountValueInAnotherCurrency(Mockito.anyLong(), eq(currencySup))).then(i -> i.getArgumentAt(0, Long.class));
+        Mockito.when(currencySup.convertAmountValueInAnotherCurrency(Mockito.anyLong(), eq(currency))).then(i -> i.getArgumentAt(0, Long.class));
+        Amount amount = new Amount(currency, 100);
+        Amount amountSup = new Amount(currencySup, 150);
+        amountSup.debit(amount);
+        assertEquals(50, amountSup.getValue());
     }
 }

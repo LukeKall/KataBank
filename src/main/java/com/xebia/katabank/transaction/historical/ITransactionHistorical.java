@@ -11,7 +11,7 @@ public interface ITransactionHistorical {
 
     Transaction getTransaction(String id);
     void addTransaction(Transaction transaction);
-    void removeTransaction(Transaction transaction);
+    void removeTransaction(String id);
     void updateTransaction(Transaction transaction);
     List<Transaction> getAllTransactions();
 }

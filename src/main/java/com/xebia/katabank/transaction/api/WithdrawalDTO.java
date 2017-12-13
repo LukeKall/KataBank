@@ -7,6 +7,9 @@ public class WithdrawalDTO {
     long amount;
     String codeCurrency;
 
+    public WithdrawalDTO() {
+    }
+
     public WithdrawalDTO(String accountId, long amount, String codeCurrency) {
         this.accountId = accountId;
         this.amount = amount;
@@ -23,5 +26,17 @@ public class WithdrawalDTO {
 
     public String getCodeCurrency() {
         return codeCurrency;
+    }
+
+    public void setAccountId(String accountId) {
+        this.accountId = accountId;
+    }
+
+    public void setAmount(long amount) {
+        this.amount = amount;
+    }
+
+    public void setCodeCurrency(String codeCurrency) {
+        this.codeCurrency = codeCurrency;
     }
 }

@@ -1,8 +1,10 @@
 package com.xebia.katabank.transaction.services;
 
+import com.xebia.katabank.account.error.BalanceUnsuffisantException;
+
 /**
  * Services offerts aux transactions
  */
 public interface ITransactionService {
-    void makeAAccountWithdrawalInEuro(String accountId, long amount, String codeCurrency);
+    void makeAAccountWithdrawal(String accountId, long amount, String codeCurrency) throws BalanceUnsuffisantException;
 }

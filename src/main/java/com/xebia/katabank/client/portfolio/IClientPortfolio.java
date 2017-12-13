@@ -11,7 +11,7 @@ public interface IClientPortfolio {
 
     Client getClient(String id);
     void addClient(Client client);
-    void removeClient(Client client);
+    void removeClient(String id);
     void updateClient(Client client);
     List<Client> getAllClients();
     Client getClientByLogin(String login);

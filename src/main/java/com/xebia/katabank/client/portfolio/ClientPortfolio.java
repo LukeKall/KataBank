@@ -34,7 +34,7 @@ public class ClientPortfolio implements IClientPortfolio {
     }
 
     @Override
-    public void removeClient(Client client) {
+    public void removeClient(String id) {
         throw new NotImplementedException();
     }
 

@@ -8,6 +8,8 @@ public class Amount {
     private Currency currency;
     private long value;
 
+    public Amount() {
+    }
 
     public Amount(Currency currency, long value) {
         this.currency = currency;

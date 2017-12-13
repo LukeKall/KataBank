@@ -33,7 +33,7 @@ public class CurrencyRepository implements ICurrencyRepository {
     }
 
     @Override
-    public void removeCurrency(Currency currency) {
+    public void removeCurrency(String code) {
         throw new NotImplementedException();
     }
 

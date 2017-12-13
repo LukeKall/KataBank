@@ -84,7 +84,7 @@ public class Account {
      * @return
      */
     public boolean isClientPropriety(UUID clientId){
-        return this.clientId == clientId;
+        return this.clientId.equals(clientId);
     }
 
     @Override

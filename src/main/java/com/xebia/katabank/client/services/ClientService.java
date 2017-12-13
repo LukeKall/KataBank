@@ -45,6 +45,6 @@ public class ClientService implements  IClientService {
      */
     @Override
     public List<Account> getAllClientAccounts(String idClient){
-        return accountRepository.getAcountsByClient(idClient);
+        return accountRepository.getAccountsByClient(idClient);
     }
 }
