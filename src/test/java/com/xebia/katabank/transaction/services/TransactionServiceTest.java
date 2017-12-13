@@ -1,6 +1,6 @@
 package com.xebia.katabank.transaction.services;
 
-import com.xebia.katabank.MockitoExtension;
+import com.xebia.katabank.extension.MockitoExtension;
 import com.xebia.katabank.account.entities.Account;
 import com.xebia.katabank.account.error.BalanceUnsuffisantException;
 import com.xebia.katabank.account.repository.IAccountRepository;

@@ -47,7 +47,7 @@ public class ClientRestControllerTest {
     @Test
     public void testGetAllAccountsById(){
         Date date = new Date();
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss.SSSZ");
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
         df.setTimeZone(TimeZone.getTimeZone("GMT+0"));
 
         Currency currency = new Currency("eur", "euro", "€");

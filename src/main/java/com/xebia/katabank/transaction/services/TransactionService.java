@@ -12,7 +12,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 @Named
-public class TransactionService implements  ITransactionService {
+public class TransactionService implements ITransactionService {
 
     @Inject
     IAccountRepository accountRepository;

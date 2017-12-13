@@ -30,17 +30,19 @@ public class ClientPortfolio implements IClientPortfolio {
 
     @Override
     public void addClient(Client client) {
-        throw new NotImplementedException();
+        allClients.put(client.getId().toString(), client);
     }
 
     @Override
     public void removeClient(String id) {
-        throw new NotImplementedException();
+        allClients.remove(id);
     }
 
     @Override
     public void updateClient(Client client) {
-        throw new NotImplementedException();
+        if(allClients.containsKey(client.getId().toString())) {
+            allClients.put(client.getId().toString(), client);
+        }
     }
 
     @Override

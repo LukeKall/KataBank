@@ -6,7 +6,6 @@ import com.xebia.katabank.money.entities.Currency;
 import com.xebia.katabank.transaction.entities.Transaction;
 import com.xebia.katabank.transaction.entities.Withdrawal;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -21,7 +20,9 @@ public class AccountTest {
 
     @Test
     public void testIsClientPropriety(){
-        Account account = new Account(UUID.fromString("100c3a52-dfde-11e7-80c1-9a214cf093ae"), "name", "number", Mockito.mock(Balance.class));
+        Currency currency = new Currency("eur", "euro", "€");
+        Balance balance = new Balance(new Amount(currency, 100), new Date());
+        Account account = new Account(UUID.fromString("100c3a52-dfde-11e7-80c1-9a214cf093ae"), "name", "number", balance);
         assertTrue(account.isClientPropriety(UUID.fromString("100c3a52-dfde-11e7-80c1-9a214cf093ae")));
         assertFalse(account.isClientPropriety(UUID.fromString("100c3d72-dfde-11e7-80c1-9a214cf093ae")));
     }
@@ -45,15 +46,15 @@ public class AccountTest {
 
     @Test
     public void testMakeAWithdrawal() throws BalanceUnsuffisantException {
-        Balance balance = Mockito.mock(Balance.class);
+        Currency currency = new Currency("eur", "euro", "€");
+        Balance balance = new Balance(new Amount(currency, 100), new Date());
+
         Account account = new Account(UUID.fromString("100c3a52-dfde-11e7-80c1-9a214cf093ae"), "name", "number", balance);
-        Mockito.when(balance.isBalanceSuffisantForDebit(Mockito.any(Amount.class))).thenReturn(true);
-        Transaction transaction = account.makeAWithdrawal(50, Mockito.mock(Currency.class));
+        Transaction transaction = account.makeAWithdrawal(50, currency);
         assertTrue(transaction instanceof Withdrawal);
         assertEquals(50, transaction.getAmount().getValue());
         assertEquals(account.getId(), ((Withdrawal)transaction).getDebitAccountId());
 
-        Mockito.when(balance.isBalanceSuffisantForDebit(Mockito.any(Amount.class))).thenReturn(false);
-        assertThrows(BalanceUnsuffisantException.class, ()-> {account.makeAWithdrawal(50,  Mockito.mock(Currency.class));});
+        assertThrows(BalanceUnsuffisantException.class, ()-> {account.makeAWithdrawal(150,  currency);});
     }
 }

@@ -1,6 +1,6 @@
 package com.xebia.katabank.account.services;
 
-import com.xebia.katabank.MockitoExtension;
+import com.xebia.katabank.extension.MockitoExtension;
 import com.xebia.katabank.account.entities.Account;
 import com.xebia.katabank.account.entities.Balance;
 import com.xebia.katabank.account.repository.IAccountRepository;

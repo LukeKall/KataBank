@@ -34,16 +34,18 @@ public class TransactionHistorical implements ITransactionHistorical {
 
     @Override
     public void removeTransaction(String id) {
-        throw new NotImplementedException();
+        allTransactions.remove(id);
     }
 
     @Override
     public void updateTransaction(Transaction transaction) {
-        throw new NotImplementedException();
+        if(allTransactions.containsKey(transaction.getId().toString())) {
+            allTransactions.put(transaction.getId().toString(), transaction);
+        }
     }
 
     @Override
     public List<Transaction> getAllTransactions() {
-        throw new NotImplementedException();
+        return new ArrayList<>(allTransactions.values());
     }
 }

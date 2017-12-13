@@ -1,12 +1,11 @@
 package com.xebia.katabank.client.services;
 
-import com.xebia.katabank.MockitoExtension;
+import com.xebia.katabank.extension.MockitoExtension;
 import com.xebia.katabank.account.entities.Account;
 import com.xebia.katabank.account.entities.Balance;
 import com.xebia.katabank.account.repository.AccountRepository;
 import com.xebia.katabank.client.entities.Client;
 import com.xebia.katabank.client.portfolio.ClientPortfolio;
-import com.xebia.katabank.client.services.ClientService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.platform.runner.JUnitPlatform;
@@ -15,9 +14,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
-import javax.inject.Inject;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 

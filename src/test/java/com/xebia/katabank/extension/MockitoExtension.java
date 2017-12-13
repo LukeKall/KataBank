@@ -1,4 +1,4 @@
-package com.xebia.katabank;
+package com.xebia.katabank.extension;
 
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.ParameterContext;

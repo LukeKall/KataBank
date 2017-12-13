@@ -4,7 +4,6 @@ import com.xebia.katabank.account.error.BalanceUnsuffisantException;
 import com.xebia.katabank.money.entities.Amount;
 import com.xebia.katabank.money.entities.Currency;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -18,11 +17,10 @@ public class BalanceTest {
 
     @Test
     public void testIsBalanceSuffisantForDebit(){
-        Amount amount = Mockito.mock(Amount.class);
-        Amount amountSup = Mockito.mock(Amount.class);
+        Currency currency = new Currency("eur", "euro", "€");
+        Amount amount = new Amount(currency, 100);
+        Amount amountSup = new Amount(currency, 150);
         Balance balance = new Balance(amount, new Date());
-        Mockito.when(amount.isSuperiorThan(amountSup)).thenReturn(false);
-        Mockito.when(amountSup.isSuperiorThan(amount)).thenReturn(true);
         assertFalse(balance.isBalanceSuffisantForDebit(amountSup));
 
         balance = new Balance(amountSup, new Date());
@@ -31,31 +29,9 @@ public class BalanceTest {
 
     @Test
     public void testDebit() throws BalanceUnsuffisantException {
-        Amount balanceAmount = Mockito.mock(Amount.class);
-        Amount amount = new Amount(new Currency("eur", "eur", "eur"), 50);
-
-        Mockito.when(balanceAmount.isSuperiorThan(amount)).thenReturn(true);
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.YEAR, 2000);
-        Balance balance = new Balance(balanceAmount, calendar.getTime());
-        Date date = new Date();
-        Mockito.doNothing().when(balanceAmount).debit(amount);
-        balance.debit(amount, date);
-
-        assertEquals(date, balance.getLastUpdate());
-
-        Mockito.when(balanceAmount.isSuperiorThan(amount)).thenReturn(false);
-        Balance balance2 = new Balance(balanceAmount, calendar.getTime());
-
-        assertThrows(BalanceUnsuffisantException.class, ()-> {balance2.debit(amount, date);});
-        assertNotEquals(date, balance2.getLastUpdate());
-    }
-
-    @Test
-    public void testDebitDependsOfAmount() throws BalanceUnsuffisantException {
-        Amount amount = new Amount(new Currency("eur", "eur", "eur"), 50);
-        Amount balanceAmount = new Amount(new Currency("eur", "eur", "eur"), 200);
+        Currency currency = new Currency("eur", "euro", "€");
+        Amount balanceAmount =new Amount(currency, 200);
+        Amount amount = new Amount(currency, 50);
 
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.YEAR, 2000);
@@ -66,5 +42,9 @@ public class BalanceTest {
         assertEquals(date, balance.getLastUpdate());
         assertEquals(150, balance.getAmount().getValue());
 
+        Balance balance2 = new Balance(amount, calendar.getTime());
+
+        assertThrows(BalanceUnsuffisantException.class, ()-> {balance.debit(balanceAmount, date);});
+        assertNotEquals(date, balance2.getLastUpdate());
     }
 }

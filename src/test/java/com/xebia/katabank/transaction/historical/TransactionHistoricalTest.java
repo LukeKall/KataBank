@@ -58,6 +58,7 @@ public class TransactionHistoricalTest {
         List<Transaction> transactionList = new ArrayList<>();
         transactionList.add(transaction);
         transactionList.add( transactionHistorical.getTransaction("100c2df0-dfde-11e7-80c1-9a214cf093ae"));
+        transactionHistorical.addTransaction(transaction);
         List<Transaction> results = transactionHistorical.getAllTransactions();
         assertEquals(2, results.size());
         assertTrue(transactionList.containsAll(results));

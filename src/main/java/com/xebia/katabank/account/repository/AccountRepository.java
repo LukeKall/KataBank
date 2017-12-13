@@ -36,12 +36,12 @@ public class AccountRepository implements IAccountRepository {
 
     @Override
     public void addAccount(Account account) {
-        throw new NotImplementedException();
+        allAcounts.put(account.getId().toString(), account);
     }
 
     @Override
     public void removeAccount(String id) {
-        throw new NotImplementedException();
+        allAcounts.remove(id);
     }
 
     @Override

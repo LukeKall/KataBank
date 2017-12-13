@@ -29,17 +29,19 @@ public class CurrencyRepository implements ICurrencyRepository {
 
     @Override
     public void addCurrency(Currency currency) {
-        throw new NotImplementedException();
+        allCurrencies.put(currency.getCode(), currency);
     }
 
     @Override
     public void removeCurrency(String code) {
-        throw new NotImplementedException();
+        allCurrencies.remove(code);
     }
 
     @Override
     public void updateCurrency(Currency currency) {
-        throw new NotImplementedException();
+        if(allCurrencies.containsKey(currency.getCode())) {
+            allCurrencies.put(currency.getCode(), currency);
+        }
     }
 
     @Override
